@@ -61,18 +61,18 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        HttpSession session =  request.getSession();
+        HttpSession session = request.getSession();
         if (path.endsWith("/HomeController/User")) {
-            AccountDAO adao = new AccountDAO();  
-            User user =  adao.getAccount("joonnguyen2712@gmail.com");
+            AccountDAO adao = new AccountDAO();
+            User user = adao.getAccount("joonnguyen2712@gmail.com");
             session.setAttribute("user", user);
             request.getRequestDispatcher("/user.jsp").forward(request, response);
         } else if (path.endsWith("/HomeController/User/Edit")) {
-            AccountDAO adao = new AccountDAO();  
-            User user =  adao.getAccount("joonnguyen2712@gmail.com");
+            AccountDAO adao = new AccountDAO();
+            User user = adao.getAccount("joonnguyen2712@gmail.com");
             session.setAttribute("userRepair", user);
             request.getRequestDispatcher("/edit.jsp").forward(request, response);
-        } 
+        }
     }
 
     /**
@@ -84,24 +84,25 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//         if (request.getParameter("btnUpdate") != null) {
-//            String fulName = request.getParameter("fullName");
-//            String address = request.getParameter("txtAdd");
-//            String phone = request.getParameter("phone");
-//            AccountDAO cDao = new AccountDAO();
-//            Account newAcc = new Account(username, "a", fulName, address, phone);
-//            Account rs = cDao.update(username, newAcc);
-//            if (rs == null) {//them that bai
-//                Account thongtincu = cDao.getAccount(username);
-//                session.setAttribute("account", thongtincu);
-//                response.sendRedirect("/HomeController/User/Edit");
-//            } else {
-//                session.setAttribute("account", newAcc);
-//                response.sendRedirect("/HomeController/User");
-//            }
-//        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        if (request.getParameter("btnUpdate") != null) {
+            String fulName = request.getParameter("fullName");
+            String address = request.getParameter("txtAdd");
+            String phone = request.getParameter("phone");
+            AccountDAO cDao = new AccountDAO();
+            User userOld = cDao.getAccount("joonnguyen2712@gmail.com");
+            User userNew = new User(userOld.getUser_id(), fulName, phone, address, userOld.getAcc_id());
+            User rs = cDao.update("joonnguyen2712@gmail.com", userNew);
+            if (rs == null) {//them that bai    
+                session.setAttribute("account", userOld);
+                response.sendRedirect("/HomeController/User/Edit");
+            } else {
+                session.setAttribute("account", userNew);
+                response.sendRedirect("/HomeController/User");
+            }
+
+        }
     }
 
     /**

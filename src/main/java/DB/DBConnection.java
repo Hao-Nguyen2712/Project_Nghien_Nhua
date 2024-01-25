@@ -18,7 +18,8 @@ public class DBConnection {
 
     public static Connection connect() throws ClassNotFoundException, SQLException {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://Hieu\\HIEU;databaseName=db_Nghien_Nhua;user=sa;password=123;encrypt=true;trustServerCertificate=true");
+//        Connection conn = DriverManager.getConnection("jdbc:sqlserver:DESKTOP-N2G9N3D;databaseName=db_Nghien_Nhua;user=sa;password=123;encrypt=true;trustServerCertificate=true");
+          Connection conn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-N2G9N3D\\SQLEXPRESS:1433;databaseName=db_Nghien_Nhua;user=sa;password=27122003;encrypt=true;trustServerCertificate=true");
         return conn;
     }
 }

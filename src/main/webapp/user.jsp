@@ -18,7 +18,18 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   
-      
+              <style>
+            .gradient-custom {
+                background: rgb(255,101,249);
+                background: linear-gradient(90deg, rgba(255,101,249,1) 0%, rgba(249,247,112,1) 100%);
+            }
+            .btn-logout{
+                /* fallback for old browsers */
+
+                background: rgb(255,101,249);
+                background: linear-gradient(90deg, rgba(255,101,249,1) 0%, rgba(249,247,112,1) 100%);
+            }
+        </style>
        
     </head>
     <body>
@@ -46,11 +57,7 @@
                                     <div class="card-body p-4">
                                         <h4>Thông tin</h4>
                                         <hr class="mt-0 mb-4">
-                                        <div class="row pt-1">
-                                            <div class="col-6 mb-3">
-                                                <h6>Tên người dùng</h6> 
-                                                <p class="text-muted"><%= user.getUser_id() %></p>
-                                            </div>
+                                        <div class="row pt-1">                                
                                             <div class="col-6 mb-3">
                                                 <h6>Họ và tên</h6>
                                                 <p class="text-muted"><%= user.getUser_fullName()%></p>
